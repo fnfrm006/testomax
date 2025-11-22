@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testomax Revolution | Premium Testosterone Booster</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Tajawal:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            red: '#D00000', /* Vibrant Red */
+                            dark: '#050505',
+                            gold: '#FFD700',
+                            gray: '#1A1A1A'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Open Sans', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif'],
+                        arabic: ['Tajawal', 'sans-serif'], 
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        [dir="rtl"] { font-family: 'Tajawal', sans-serif; }
+        
+        /* Premium Backgrounds */
+        .hero-gradient {
+            background: radial-gradient(circle at top right, #3a0a0a 0%, #000000 60%);
+        }
+        
+        /* Glass Effect */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero Slider Animation */
+        .slider-container {
+            position: relative;
+            height: 600px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .slider-image {
+            position: absolute;
+            max-height: 100%;
+            max-width: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out, transform 6s ease-in-out;
+            transform: scale(0.95);
+        }
+        
+        .slider-image.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 10;
+        }
+
+        /* Button Glow */
+        .btn-glow {
+            transition: all 0.4s ease;
+            box-shadow: 0 0 15px rgba(208, 0, 0, 0.4);
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 30px rgba(208, 0, 0, 0.8);
+            transform: translateY(-3px);
+        }
+
+        /* Image Hover Zoom */
+        .img-zoom-container {
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        .img-zoom {
+            transition: transform 0.5s ease;
+        }
+        .img-zoom-container:hover .img-zoom {
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Loader -->
+    <div id="loader" class="fixed inset-0 z-[9999] flex items-center justify-center bg-black transition-opacity duration-500">
+        <div class="text-center">
+            <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-brand-red mx-auto mb-4"></div>
+            <p class="text-gray-400 text-sm animate-pulse">Detecting Region & Optimizing Experience...</p>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 glass-card border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex-shrink-0 flex items-center gap-2 group">
+                    <span class="font-display font-black text-2xl tracking-tighter text-white group-hover:text-gray-200 transition">
+                        TESTOMAX <span class="text-brand-red">REVOLUTION</span>
+                    </span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8 rtl:space-x-reverse">
+                        <a href="#benefits" class="hover:text-brand-red transition-colors px-3 text-sm uppercase tracking-wide font-bold" data-i18n="nav_benefits">Benefits</a>
+                        <a href="#ingredients" class="hover:text-brand-red transition-colors px-3 text-sm uppercase tracking-wide font-bold" data-i18n="nav_ingredients">Ingredients</a>
+                        <a href="#comparison" class="hover:text-brand-red transition-colors px-3 text-sm uppercase tracking-wide font-bold" data-i18n="nav_compare">Comparison</a>
+                        <a href="#reviews" class="hover:text-brand-red transition-colors px-3 text-sm uppercase tracking-wide font-bold" data-i18n="nav_reviews">Reviews</a>
+                    </div>
+                </div>
+
+                <!-- CTA & Lang -->
+                <div class="flex items-center gap-4">
+                    <select id="lang-selector" onchange="manualLanguageChange(this.value)" class="bg-black/50 border border-white/20 rounded text-xs py-2 px-2 text-white focus:border-brand-red outline-none cursor-pointer">
+                        <option value="en">EN</option>
+                        <option value="de">DE</option>
+                        <option value="ar">AR</option>
+                        <option value="tr">TR</option>
+                        <option value="ru">RU</option>
+                    </select>
+                    <a href="#order" class="bg-brand-red px-6 py-2 rounded-full font-bold uppercase text-xs tracking-wider btn-glow hidden sm:block" data-i18n="cta_buy">
+                        Order Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Slider -->
+    <div class="relative hero-gradient pt-32 pb-16 lg:pt-48 lg:pb-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                
+                <!-- Text Content -->
+                <div data-aos="fade-right" class="text-center lg:text-left rtl:lg:text-right">
+                    <div class="inline-block px-4 py-1 rounded-full bg-white/10 border border-white/20 text-brand-gold font-bold text-xs mb-6 tracking-widest uppercase backdrop-blur-sm" data-i18n="hero_badge">
+                        Premium Testosterone Formula
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-display font-black leading-none mb-6 drop-shadow-xl">
+                        <span data-i18n="hero_t1">UNLEASH</span><br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-red to-red-500" data-i18n="hero_t2">YOUR POTENTIAL</span>
+                    </h1>
+                    <p class="text-lg text-gray-300 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed" data-i18n="hero_desc">
+                        The ultimate natural booster. Increase muscle mass, energy, and drive with the power of nature.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#order" class="bg-brand-red text-white px-10 py-4 rounded-full text-lg font-bold text-center btn-glow uppercase w-full sm:w-auto" data-i18n="cta_hero">
+                            Start Now
+                        </a>
+                        <button onclick="document.getElementById('label-modal').style.display='flex'" class="border border-white/30 hover:bg-white/10 text-white px-8 py-4 rounded-full text-lg font-bold transition w-full sm:w-auto" data-i18n="view_label">
+                            View Label
+                        </button>
+                    </div>
+                    
+                    <!-- Dynamic Pricing Badge -->
+                    <div class="mt-8 flex items-center justify-center lg:justify-start gap-2">
+                        <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                        <span class="text-sm text-gray-400" id="hero-shipping-text">Detecting location...</span>
+                    </div>
+                </div>
+
+                <!-- Hero Slider (Carousel) -->
+                <div class="relative" data-aos="zoom-in" data-aos-duration="1200">
+                    <div class="absolute inset-0 bg-brand-red/20 blur-[120px] rounded-full z-0"></div>
+                    
+                    <div class="slider-container z-10">
+                        <!-- Image 1: Main Bottle -->
+                        <img src="main.jpg" alt="Testomax Revolution Bottle" class="slider-image active drop-shadow-2xl">
+                        <!-- Image 2: Second Angle/Group -->
+                        <img src="main2.jpg" alt="Testomax Revolution Product" class="slider-image drop-shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quality Section (Using quality.jpg) -->
+    <div id="benefits" class="bg-brand-gray border-y border-white/5">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 items-center">
+                <div class="p-8 md:p-16 order-2 md:order-1" data-aos="fade-right">
+                    <h3 class="text-3xl font-display font-bold mb-6" data-i18n="quality_title">Quality in Every Capsule</h3>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex items-center gap-3">
+                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span data-i18n="q_1">Easy-to-swallow plant capsule</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span data-i18n="q_2">No artificial additives</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span data-i18n="q_3">Non-GMO & Gluten-free</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span data-i18n="q_4">3rd-party lab tested for safety</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span data-i18n="q_5">Manufactured in USA</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="h-full min-h-[400px] relative order-1 md:order-2 img-zoom-container">
+                    <!-- UPLOADED IMAGE: quality.jpg -->
+                    <img src="quality.jpg" alt="Quality Assurance" class="absolute inset-0 w-full h-full object-cover img-zoom">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ingredients Section (Using ingredients.jpg) -->
+    <div id="ingredients" class="py-20 bg-black relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl md:text-5xl font-display font-bold mb-4"><span class="text-brand-red">12 Powerful</span> Ingredients</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto" data-i18n="ing_sub">Scientifically selected extracts. No fillers.</p>
+            </div>
+
+            <div class="glass-card p-2 md:p-4 rounded-2xl" data-aos="zoom-in">
+                <!-- UPLOADED IMAGE: ingredients.jpg -->
+                <!-- This image is complex, so we display it large -->
+                <img src="ingredients.jpg" alt="Ingredients Chart" class="w-full rounded-xl shadow-2xl border border-white/10">
+            </div>
+
+            <!-- Commitment Section embedded below ingredients -->
+            <div class="mt-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right">
+                    <!-- UPLOADED IMAGE: commitment.jpg -->
+                    <img src="commitment.jpg" alt="Our Commitment" class="w-full rounded-xl shadow-lg border border-white/10 hover:scale-[1.02] transition duration-500">
+                </div>
+                <div data-aos="fade-left">
+                    <h3 class="text-3xl font-bold mb-6" data-i18n="commit_title">Our Commitment to Quality</h3>
+                    <p class="text-gray-400 mb-4 leading-relaxed" data-i18n="commit_desc">
+                        Every step of the way, from nature's finest ingredients to innovation encapsulated. We put your health first.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mt-6">
+                        <div class="bg-brand-gray p-4 rounded-lg border border-white/5">
+                            <h4 class="text-brand-gold font-bold mb-1">Purity</h4>
+                            <p class="text-xs text-gray-500">Strict selection process</p>
+                        </div>
+                        <div class="bg-brand-gray p-4 rounded-lg border border-white/5">
+                            <h4 class="text-brand-gold font-bold mb-1">Innovation</h4>
+                            <p class="text-xs text-gray-500">Scientific formulation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparison Section (Using comparison.jpg) -->
+    <div id="comparison" class="py-20 bg-brand-gray">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-display font-bold" data-i18n="compare_title">Testomax vs Others</h2>
+            </div>
+            
+            <div class="flex justify-center" data-aos="fade-up">
+                <!-- UPLOADED IMAGE: comparison.jpg -->
+                <img src="comparison.jpg" alt="Comparison Table" class="w-full max-w-3xl rounded-lg shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+            </div>
+        </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div id="reviews" class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-brand-red/5"></div>
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <h2 class="text-4xl font-display font-bold text-center mb-16" data-i18n="reviews_title">Real Results</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="glass-card p-8 rounded-xl relative hover:-translate-y-2 transition duration-300" data-aos="flip-left">
+                    <div class="text-brand-gold text-xl mb-4">★★★★★</div>
+                    <p class="text-gray-300 mb-6 italic" data-i18n="rev_1_text">"I've tried many boosters, but Testomax is the only one where I felt the energy shift in the first week. My workouts are insane now."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-brand-red to-black rounded-full flex items-center justify-center font-bold border border-white/20">M</div>
+                        <div>
+                            <p class="font-bold text-white">Markus S.</p>
+                            <p class="text-xs text-gray-500">Berlin, Germany</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Review 2 -->
+                <div class="glass-card p-8 rounded-xl relative hover:-translate-y-2 transition duration-300" data-aos="flip-left" data-aos-delay="100">
+                    <div class="text-brand-gold text-xl mb-4">★★★★★</div>
+                    <p class="text-gray-300 mb-6 italic" data-i18n="rev_2_text">"Great delivery speed to France. The product quality is visibly premium. I feel more focused and aggressive in the gym."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-brand-red to-black rounded-full flex items-center justify-center font-bold border border-white/20">A</div>
+                        <div>
+                            <p class="font-bold text-white">Antoine L.</p>
+                            <p class="text-xs text-gray-500">Lyon, France</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="glass-card p-8 rounded-xl relative hover:-translate-y-2 transition duration-300" data-aos="flip-left" data-aos-delay="200">
+                    <div class="text-brand-gold text-xl mb-4">★★★★★</div>
+                    <p class="text-gray-300 mb-6 italic" data-i18n="rev_3_text">"Finally a product with transparent ingredients. The Ashwagandha and Tongkat Ali blend is perfect for recovery."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-brand-red to-black rounded-full flex items-center justify-center font-bold border border-white/20">K</div>
+                        <div>
+                            <p class="font-bold text-white">Kemal Y.</p>
+                            <p class="text-xs text-gray-500">Istanbul, Turkey</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dynamic Order Section -->
+    <div id="order" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-black to-brand-red/20"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <div class="glass-card p-10 md:p-16 rounded-3xl border border-brand-gold/30 shadow-[0_0_80px_rgba(208,0,0,0.15)]" data-aos="zoom-in">
+                
+                <h2 class="text-3xl md:text-5xl font-display font-black mb-4 uppercase" data-i18n="offer_title">
+                    Start Your Transformation
+                </h2>
+                
+                <div class="my-8 bg-black/40 inline-block px-8 py-4 rounded-2xl border border-white/10">
+                    <p class="text-gray-500 line-through text-lg">€89.99</p>
+                    <!-- Dynamic Price -->
+                    <p id="final-price" class="text-6xl font-black text-brand-red my-1">€39.99</p>
+                    <p id="shipping-text" class="text-green-400 font-bold uppercase tracking-wide text-sm">Free Worldwide Shipping</p>
+                </div>
+
+                <div class="mt-2">
+                    <a id="buy-btn" href="#" target="_blank" class="inline-flex items-center gap-3 bg-[#FFC439] hover:bg-[#FFD368] text-black px-12 py-6 rounded-full text-xl font-black uppercase tracking-wider btn-glow transition-all w-full md:w-auto justify-center shadow-xl">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.946 5.05-3.639 6.701-7.092 7.091h-.001-.067a1.4 1.4 0 0 0-1.32 1.006l-.15.96a.641.641 0 0 0 .632.746h3.8a.641.641 0 0 0 .633-.74l-.122-.778c1.479-.36 2.75-1.48 3.234-4.486.36-2.246-.09-4.09-1.58-5.792C16.69 2.242 14.032 1.52 10.868 1.52H6.512a.641.641 0 0 0-.632.743l-6.56 41.73z"/></svg>
+                        <span data-i18n="btn_checkout">Buy Now</span>
+                    </a>
+                </div>
+
+                <div class="mt-8 flex items-center justify-center gap-2 text-xs text-gray-500">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                    <span id="geo-debug">Locating you...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center text-center">
+            
+            <div class="flex flex-wrap justify-center gap-8 mb-8">
+                <!-- TikTok Link -->
+                <a href="https://www.tiktok.com/@testomax.revolution" target="_blank" class="flex items-center gap-2 text-white hover:text-brand-red transition-colors">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                    <span class="font-bold">@testomax.revolution</span>
+                </a>
+
+                <!-- Email Link -->
+                <a href="mailto:teamtestomax@gmail.com" class="flex items-center gap-2 text-white hover:text-brand-red transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <span class="font-bold">teamtestomax@gmail.com</span>
+                </a>
+            </div>
+
+            <p class="text-gray-600 text-xs max-w-lg">
+                © 2024 Testomax Revolution. All rights reserved.<br>
+                The statements made have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Modal for Label Image -->
+    <div id="label-modal" class="fixed inset-0 bg-black/90 z-[100] hidden items-center justify-center p-4 backdrop-blur-sm" onclick="this.style.display='none'">
+        <div class="relative max-w-lg w-full">
+            <button class="absolute -top-12 right-0 text-white text-4xl hover:text-brand-red">&times;</button>
+            <!-- UPLOADED IMAGE: label.jpg -->
+            <img src="label.jpg" class="w-full rounded-lg shadow-2xl border border-white/20">
+        </div>
+    </div>
+
+    <!-- SCRIPT LOGIC -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // 1. Init Animations
+        AOS.init({ once: true, offset: 50, duration: 800 });
+
+        // 2. Slider Logic
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slider-image');
+        
+        function showSlides() {
+            if(slides.length === 0) return;
+            
+            // Hide all
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Increment
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            
+            // Show current
+            slides[slideIndex - 1].classList.add('active');
+            
+            // Loop every 4 seconds
+            setTimeout(showSlides, 4000);
+        }
+        
+        // Start Slider
+        showSlides();
+
+        // 3. Geo & Language Logic
+        const EU_COUNTRIES = ['AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'GR', 'HU', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE'];
+        
+        const CONFIG = {
+            DE: { price: '€19.99', link: 'https://www.paypal.com/ncp/payment/LY8JCT7QRU7EY', text: 'Fast Shipping to Germany', badge: 'Germany Special' },
+            EU: { price: '€29.99', link: 'https://www.paypal.com/ncp/payment/QAV6X8P7XLH2S', text: 'Standard EU Shipping', badge: 'EU Pricing' },
+            WORLD: { price: '€39.99', link: 'https://www.paypal.com/ncp/payment/92F2K3XMBKZ4A', text: 'Free Worldwide Shipping', badge: 'Global Shipping' }
+        };
+
+        const I18N = {
+            en: {
+                nav_benefits: "Benefits", nav_ingredients: "Ingredients", nav_compare: "Comparison", nav_reviews: "Reviews", cta_buy: "Order Now",
+                hero_badge: "Premium Testosterone Formula", hero_t1: "UNLEASH", hero_t2: "YOUR POTENTIAL",
+                hero_desc: "The ultimate natural booster. Increase muscle mass, energy, and drive with the power of nature.",
+                cta_hero: "Start Now", view_label: "View Label",
+                quality_title: "Quality in Every Capsule", q_1: "Easy-to-swallow plant capsule", q_2: "No artificial additives", q_3: "Non-GMO & Gluten-free", q_4: "3rd-party lab tested", q_5: "Manufactured in USA",
+                ing_sub: "Scientifically selected extracts. No fillers.",
+                commit_title: "Our Commitment to Quality", commit_desc: "Every step of the way, from nature's finest ingredients to innovation encapsulated. We put your health first.",
+                compare_title: "Testomax vs Others",
+                reviews_title: "Real Results",
+                offer_title: "Start Your Transformation", btn_checkout: "Buy Now",
+                rev_1_text: "I've tried many boosters, but Testomax is the only one where I felt the energy shift in the first week.",
+                rev_2_text: "Great delivery speed to France. The product quality is visibly premium.",
+                rev_3_text: "Finally a product with transparent ingredients. The Ashwagandha blend is perfect."
+            },
+            de: {
+                nav_benefits: "Vorteile", nav_ingredients: "Inhaltsstoffe", nav_compare: "Vergleich", nav_reviews: "Bewertungen", cta_buy: "Bestellen",
+                hero_badge: "Premium Testosteron Formel", hero_t1: "ENTFESSLE", hero_t2: "DEIN POTENZIAL",
+                hero_desc: "Der ultimative natürliche Booster. Steigern Sie Muskelmasse, Energie und Antrieb mit der Kraft der Natur.",
+                cta_hero: "Jetzt Starten", view_label: "Etikett Ansehen",
+                quality_title: "Qualität in jeder Kapsel", q_1: "Leicht zu schluckende Pflanzenkapsel", q_2: "Keine künstlichen Zusatzstoffe", q_3: "Ohne Gentechnik & Glutenfrei", q_4: "Laborgeprüfte Sicherheit", q_5: "Hergestellt in den USA",
+                ing_sub: "Wissenschaftlich ausgewählte Extrakte. Keine Füllstoffe.",
+                commit_title: "Unser Qualitätsversprechen", commit_desc: "Jeder Schritt, von den besten Zutaten der Natur bis zur Innovation. Ihre Gesundheit steht an erster Stelle.",
+                compare_title: "Testomax im Vergleich",
+                reviews_title: "Echte Ergebnisse",
+                offer_title: "Starte deine Transformation", btn_checkout: " Jetzt kaufen",
+                rev_1_text: "Ich habe viele Booster probiert, aber bei Testomax spürte ich die Energie in der ersten Woche.",
+                rev_2_text: "Schnelle Lieferung. Die Qualität ist sichtbar premium.",
+                rev_3_text: "Endlich ein Produkt mit transparenten Inhaltsstoffen."
+            },
+            ar: {
+                nav_benefits: "الفوائد", nav_ingredients: "المكونات", nav_compare: "مقارنة", nav_reviews: "تقييمات", cta_buy: "اطلب الآن",
+                hero_badge: "تركيبة التستوستيرون المميزة", hero_t1: "أطلق العنان", hero_t2: "لقوتك الكامنة",
+                hero_desc: "المعزز الطبيعي الأمثل. قم بزيادة الكتلة العضلية والطاقة والدافع بقوة الطبيعة.",
+                cta_hero: "ابدأ الآن", view_label: "عرض الملصق",
+                quality_title: "جودة في كل كبسولة", q_1: "كبسولة نباتية سهلة البلع", q_2: "بدون إضافات صناعية", q_3: "غير معدل وراثياً وخالي من الغلوتين", q_4: "تم فحصه مخبرياً", q_5: "صنع في الولايات المتحدة",
+                ing_sub: "مستخلصات مختارة علمياً. بدون حشوات.",
+                commit_title: "التزامنا بالجودة", commit_desc: "في كل خطوة، من أجود المكونات الطبيعية إلى الابتكار. نضع صحتك أولاً.",
+                compare_title: "تستوماكس مقابل الآخرين",
+                reviews_title: "نتائج حقيقية",
+                offer_title: "ابدأ رحلة التغيير", btn_checkout: "اشتري الان",
+                rev_1_text: "جربت العديد من المعززات، ولكن تستوماكس هو الوحيد الذي شعرت فيه بالطاقة.",
+                rev_2_text: "سرعة توصيل ممتازة. جودة المنتج تبدو ممتازة.",
+                rev_3_text: "أخيراً منتج بمكونات شفافة. المزيج ممتاز للتعافي."
+            },
+            tr: {
+                nav_benefits: "Faydalar", nav_ingredients: "İçerik", nav_compare: "Kıyasla", nav_reviews: "Yorumlar", cta_buy: "Sipariş",
+                hero_badge: "Premium Testosteron Formülü", hero_t1: "POTANSİYELİNİ", hero_t2: "AÇIĞA ÇIKAR",
+                hero_desc: "Nihai doğal güçlendirici. Doğanın gücüyle kas kütlesini, enerjiyi ve dürtüyü artırın.",
+                cta_hero: "Şimdi Başla", view_label: "Etiketi Gör",
+                quality_title: "Her Kapsülde Kalite", q_1: "Yutması kolay bitkisel kapsül", q_2: "Yapay katkı maddesi yok", q_3: "GDO'suz ve Glutensiz", q_4: "Laboratuvar onaylı güvenlik", q_5: "ABD'de üretildi",
+                ing_sub: "Bilimsel olarak seçilmiş özler. Dolgu maddesi yok.",
+                commit_title: "Kalite Taahhüdümüz", commit_desc: "Doğanın en iyi malzemelerinden inovasyona kadar her adımda. Sağlığınızı ilk sıraya koyuyoruz.",
+                compare_title: "Testomax ve Diğerleri",
+                reviews_title: "Gerçek Sonuçlar",
+                offer_title: "Değişimi Başlat", btn_checkout: "PayPal ile Satın Al",
+                rev_1_text: "Birçok booster denedim ama Testomax ile enerji değişimini hemen hissettim.",
+                rev_2_text: "Hızlı kargo. Ürün kalitesi üst düzey.",
+                rev_3_text: "Sonunda şeffaf içerikli bir ürün."
+            },
+            ru: {
+                nav_benefits: "Преимущества", nav_ingredients: "Состав", nav_compare: "Сравнение", nav_reviews: "Отзывы", cta_buy: "Заказать",
+                hero_badge: "Премиум формула", hero_t1: "РАСКРОЙ", hero_t2: "СВОЙ ПОТЕНЦИАЛ",
+                hero_desc: "Лучший натуральный бустер. Увеличьте мышечную массу и энергию силой природы.",
+                cta_hero: "Начать сейчас", view_label: "Посмотреть состав",
+                quality_title: "Качество в каждой капсуле", q_1: "Легко проглатываемая капсула", q_2: "Без искусственных добавок", q_3: "Без ГМО и глютена", q_4: "Проверено в лаборатории", q_5: "Сделано в США",
+                ing_sub: "Научно подобранные экстракты. Никакой воды.",
+                commit_title: "Наше обязательство качества", commit_desc: "На каждом шагу, от лучших ингредиентов до инноваций. Ваше здоровье на первом месте.",
+                compare_title: "Testomax против других",
+                reviews_title: "Реальные результаты",
+                offer_title: "Начни трансформацию", btn_checkout: "Купить",
+                rev_1_text: "Пробовал многое, но только с Testomax почувствовал прилив энергии.",
+                rev_2_text: "Быстрая доставка. Качество на высоте.",
+                rev_3_text: "Наконец-то прозрачный состав."
+            }
+        };
+
+        async function init() {
+            const loader = document.getElementById('loader');
+            
+            // System Lang
+            const systemLang = navigator.language.slice(0, 2);
+            const supportedLangs = ['en', 'de', 'ar', 'tr', 'ru'];
+            let currentLang = supportedLangs.includes(systemLang) ? systemLang : 'en';
+            
+            // Geo Detection
+            try {
+                const res = await fetch('https://ipapi.co/json/');
+                const data = await res.json();
+                const country = data.country_code;
+                
+                applyRegionSettings(country);
+                if(country === 'DE') currentLang = 'de';
+                
+            } catch (e) {
+                applyRegionSettings('WORLD');
+            }
+
+            setLanguage(currentLang);
+            document.getElementById('lang-selector').value = currentLang;
+
+            // Hide Loader
+            setTimeout(() => {
+                loader.classList.add('opacity-0', 'pointer-events-none');
+            }, 500);
+        }
+
+        function applyRegionSettings(countryCode) {
+            const priceEl = document.getElementById('final-price');
+            const btn = document.getElementById('buy-btn');
+            const note = document.getElementById('shipping-text');
+            const heroNote = document.getElementById('hero-shipping-text');
+            const debug = document.getElementById('geo-debug');
+
+            let settings;
+
+            if (countryCode === 'DE') {
+                settings = CONFIG.DE;
+            } else if (EU_COUNTRIES.includes(countryCode)) {
+                settings = CONFIG.EU;
+            } else {
+                settings = CONFIG.WORLD;
+            }
+
+            priceEl.innerText = settings.price;
+            btn.href = settings.link;
+            note.innerText = settings.text;
+            heroNote.innerText = `${settings.badge}: ${settings.price} + Free Shipping`;
+            debug.innerText = `Detected: ${countryCode}`;
+        }
+
+        function setLanguage(lang) {
+            if (lang === 'ar') {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.body.classList.add('text-right');
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.body.classList.remove('text-right');
+            }
+
+            const translations = I18N[lang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[key]) el.innerText = translations[key];
+            });
+        }
+
+        function manualLanguageChange(lang) {
+            setLanguage(lang);
+        }
+
+        window.addEventListener('DOMContentLoaded', init);
+
+    </script>
+</body>
+</html>
